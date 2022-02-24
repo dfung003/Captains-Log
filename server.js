@@ -1,8 +1,7 @@
-// NOTE: I DID NOT INSTALL MONGOOSE PACKAGE OR PUSH TO GITHUB YET
-
 require('dotenv').config()
 console.log(process.env.MONGO_URI)
 
+const Log = require('./models/logs.js')
 const express = require('express');
 const { default: mongoose } = require('mongoose');
 const app = express();
@@ -48,8 +47,16 @@ app.post('/logs', (req, res) => {
     } else {
         req.body.shipIsBroken = false
     }
-    res.send(req.body)
-    console.log(req.body)
+    
+    Log.create(req.body, (err, createdLog) => {
+        if (err) {
+            res.status(403).send(err)
+        } else {
+            console.log(createdLog)
+            res.send(createdLog) // change this to redirect to Show page
+        }
+    })
+
 });
 
 // Edit route
