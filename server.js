@@ -7,7 +7,13 @@ const express = require('express');
 const { default: mongoose } = require('mongoose');
 const app = express();
 const PORT = 3000;
+// Middleware
+app.use(express.urlencoded({ extended: true }))
 
+app.use((req, res, next) => {
+    console.log(req.body)
+    next()
+});
 
 // Views
 app.set('view engine', 'jsx');
@@ -18,6 +24,8 @@ mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
+
+
 
 // Index route
 
@@ -34,7 +42,15 @@ app.get('/logs/new', (req, res) => {
 
 
 // Create route
-
+app.post('/logs', (req, res) => {
+    if (req.body.shipIsBroken === 'on') {
+        req.body.shipIsBroken = true
+    } else {
+        req.body.shipIsBroken = false
+    }
+    res.send(req.body)
+    console.log(req.body)
+});
 
 // Edit route
 
@@ -42,6 +58,6 @@ app.get('/logs/new', (req, res) => {
 // Show route
 
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
     console.log(`Listening on Port ${PORT}.`)
 })
