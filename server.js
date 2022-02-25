@@ -22,17 +22,28 @@ app.engine('jsx', require('express-react-views').createEngine());
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
-})
+});
 
 
 
 // Index route
+app.get('/logs', (req, res) => {
+    Log.find({}, (err, foundLogs) => {
+        if (err) {
+            res.status(400).send(err)
+        } else {
+            res.render('Index', {
+                logs: foundLogs
+            })
+        }
+    })
 
+});
 
 // New route
 app.get('/logs/new', (req, res) => {
     res.render('New')
-})
+});
 
 // Delete route
 
@@ -53,7 +64,7 @@ app.post('/logs', (req, res) => {
             res.status(403).send(err)
         } else {
             console.log(createdLog)
-            res.send(createdLog) // change this to redirect to Show page
+            res.redirect('/logs') // change this to redirect to Show page
         }
     })
 
