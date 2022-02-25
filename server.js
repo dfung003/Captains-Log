@@ -82,7 +82,17 @@ app.post('/logs', (req, res) => {
 });
 
 // Edit route
-
+app.get('/logs/:id/edit', (req, res) => {
+    Log.findById(req.params.id, (err, foundLog) => {
+        if(err){
+            res.status(400).send(err)
+        } else {
+            res.render('Edit', {
+                log: foundLog
+            })
+        }
+    })
+})
 
 // Show route
 app.get('/logs/:id', (req, res) => {
