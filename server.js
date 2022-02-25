@@ -4,6 +4,7 @@ console.log(process.env.MONGO_URI)
 const Log = require('./models/logs.js')
 const express = require('express');
 const { default: mongoose } = require('mongoose');
+const methodOverride = require('method-override');
 const app = express();
 const PORT = 3000;
 // Middleware
@@ -13,6 +14,8 @@ app.use((req, res, next) => {
     console.log(req.body)
     next()
 });
+
+app.use(methodOverride('_method'))
 
 // Views
 app.set('view engine', 'jsx');
@@ -46,7 +49,15 @@ app.get('/logs/new', (req, res) => {
 });
 
 // Delete route
-
+app.delete('/logs/:id', (req, res) => {
+    Log.findByIdAndDelete(req.params.id, (err, deletedLog) => {
+        if(!err) {
+            res.redirect('/logs')
+        } else {
+            res.status(400).send(err)
+        }
+    })
+});
 
 // Update route
 
