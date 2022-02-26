@@ -38,6 +38,7 @@ app.get('/logs', (req, res) => {
             res.render('Index', {
                 logs: foundLogs
             })
+            console.log(foundLogs)
         }
     })
 
