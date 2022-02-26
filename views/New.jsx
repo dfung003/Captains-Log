@@ -5,6 +5,9 @@ class New extends React.Component {
         return(
         <div>
             <h1>New Log Page</h1>
+            <nav>
+                <a href="/logs">Back to Logs Index</a>
+            </nav>
 
             <form action="/logs" method="POST">
                 Title: <input name="title" type="text" /><br />
