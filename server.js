@@ -19,6 +19,7 @@ app.use(methodOverride('_method'))
 
 // Views
 app.set('view engine', 'jsx');
+app.use(express.static('public')); 
 app.engine('jsx', require('express-react-views').createEngine());
 
 // Mongoose Connection (models)
