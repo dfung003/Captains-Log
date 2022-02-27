@@ -3,7 +3,7 @@ const Default = require('./layout/Default.jsx')
 
 class Index extends React.Component {
     render(){
-        const logs = this.props.logs
+        const logs = this.props.logs // logs is passed from Index route in logs.js
         return(
             <Default>
                 <div>
