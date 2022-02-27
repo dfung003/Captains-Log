@@ -5,7 +5,7 @@ class Edit extends React.Component{
         return (
             <form action={`/logs/${this.props.log._id}?_method=PUT`} method="POST">
                 Title: <input type="text" name="title" defaultValue={this.props.log.title}/><br />
-                Entry: <input type="textarea" name="entry" defaultValue={this.props.log.entry}/><br />
+                Entry: <br /><textarea name="entry" defaultValue={this.props.log.entry}/><br />
                 Is Ship Broken?:
                     { this.props.log.shipIsBroken ?
                     <input type="checkbox" name="shipIsBroken" defaultChecked />:
