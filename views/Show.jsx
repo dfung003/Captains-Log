@@ -11,7 +11,7 @@ class Show extends React.Component {
         return(
             <Default>
                 <div>
-                    <h1>This is a Captain's Log for {log.title}</h1>
+                    <h1>{log.title}</h1>
                     <a href="/logs">Go Back to the Index</a>
                     <p>Date of Entry: {date}</p>
                     <p>{log.entry}</p>
